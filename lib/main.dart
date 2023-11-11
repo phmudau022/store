@@ -52,28 +52,75 @@ class _MyHomePageState extends State<MyHomePage> {
               );
             },
           ),
+          IconButton(
+            icon: Icon(Icons.person),
+            onPressed: () {
+              // Add code for signing in or navigating to the sign-in screen.
+              // For simplicity, let's just show a snackbar for now.
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Sign In Button Pressed'),
+                ),
+              );
+            },
+          ),
         ],
       ),
-      body: FoodList(onAddToCart: addToCart),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              title: Text('Home'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('About'),
+              onTap: () {
+                // Add code to navigate to the About screen.
+                // For simplicity, let's just show a snackbar for now.
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('About Button Pressed'),
+                  ),
+                );
+              },
+            ),
+            // Add more menu items as needed
+          ],
+        ),
+      ),
+      body: FoodGrid(onAddToCart: addToCart),
     );
   }
 }
 
-class FoodList extends StatelessWidget {
+class FoodGrid extends StatelessWidget {
   final Function(FoodItem) onAddToCart;
 
-  FoodList({required this.onAddToCart});
+  FoodGrid({required this.onAddToCart});
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return GridView.count(
+      crossAxisCount: 2,
       children: [
-        FoodItem(name: 'Pizza', price: 10.99, onAddToCart: onAddToCart),
-        FoodItem(name: 'Burger', price: 5.99, onAddToCart: onAddToCart),
-        FoodItem(name: 'Pasta', price: 8.99, onAddToCart: onAddToCart),
-        FoodItem(name: 'Salad', price: 7.99, onAddToCart: onAddToCart),
-        FoodItem(name: 'Soup', price: 6.99, onAddToCart: onAddToCart),
-        FoodItem(name: 'Drink', price: 2.99, onAddToCart: onAddToCart),
+        FoodItem(name: 'Pizza', price: 10.99, image: 'assets/pizza.jpg', onAddToCart: onAddToCart),
+        // Add more FoodItems as needed
       ],
     );
   }
@@ -82,11 +129,13 @@ class FoodList extends StatelessWidget {
 class FoodItem extends StatelessWidget {
   final String name;
   final double price;
+  final String image;
   final Function(FoodItem) onAddToCart;
 
   const FoodItem({
     required this.name,
     required this.price,
+    required this.image,
     required this.onAddToCart,
   });
 
@@ -94,15 +143,20 @@ class FoodItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: EdgeInsets.all(8.0),
-      child: ListTile(
-        title: Text(name),
-        subtitle: Text('\$$price'),
-        trailing: ElevatedButton(
-          onPressed: () {
-            onAddToCart(this);
-          },
-          child: Text('Add to Cart'),
-        ),
+      child: Column(
+        children: [
+          Image.asset(image, height: 120, width: double.infinity, fit: BoxFit.cover),
+          ListTile(
+            title: Text(name),
+            subtitle: Text('\$$price'),
+            trailing: ElevatedButton(
+              onPressed: () {
+                onAddToCart(this);
+              },
+              child: Text('Add to Cart'),
+            ),
+          ),
+        ],
       ),
     );
   }
