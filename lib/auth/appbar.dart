@@ -3,6 +3,7 @@ import 'package:store/screen/color.dart';
 
 AppBar homeappbar(BuildContext context) {
   return AppBar(
+    
     backgroundColor: Colors.white,
     elevation: 0,
     leading: IconButton(
