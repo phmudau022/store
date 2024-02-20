@@ -33,6 +33,15 @@ class _ItemListState extends State<ItemList> {
                 press: (){},
               ),
             ),
+            Expanded(
+              child: Itemcard(
+                imageUrl:
+                    'https://images.pexels.com/photos/1460872/pexels-photo-1460872.jpeg?auto=compress&cs=tinysrgb&w=600',
+                title: "pasta",
+                shopname: "McDonald's",
+                press: (){},
+              ),
+            ),
             //  Expanded(
             //   child: Itemcard(
             //     imageUrl:
