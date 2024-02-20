@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:store/auth/details/details_screen.dart';
+import 'package:store/details/details_screen.dart';
 
 class ButtonNavigator extends StatefulWidget {
   const ButtonNavigator({Key? key}) : super(key: key);
